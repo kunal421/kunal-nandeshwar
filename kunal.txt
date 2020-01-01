@@ -1,0 +1,4 @@
+//2.create emloyee table as follows eno, name ,desig, salary write ajax progaram to select emp name and print the selected emp details//
+//3.write ajax proarm to get book details from xml file when user select a book name. create xml file to store book details// 
+//4.write ajax program to read a textfile and print the contents of the file wwhen the user click on the print button//
+//5.write ajax program to carry out valdation for a username enteredin textbox.if the textbox is blank,print'enter username'.if he number of character is less than three print username is too short if value entered is appropriate then valid username 
