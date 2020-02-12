@@ -1,0 +1,61 @@
+import java.util.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.sql.*;
+class account extends Frame implements ActionListener
+{
+	Connection con;
+	TextField t1,t2;
+	Button  b;
+	account()
+	{
+		
+	Class.forName("com.mysql.jdbc.Driver");
+	Connection con=DriverManager.getConnection("jdbc:mysql://localhost/test","root","1234");
+		
+	Label l1=new Label("ACCno");
+	Label l2=new Label("Name");
+	Label l3=new Label("Acc.Type");
+	
+	TextField t1=new TextField(10);
+	TextField t2=new TextField(10);
+
+	Choice c = new Choice();
+	c.add("");
+	c.add("Saving");
+	c.add("PPF");
+	c.add("Current");
+	
+	Button b = new Button("Search");
+
+	
+	b.addActionListener(this);
+	add(l1);add(t1);
+	add(l2);add(t2);
+	add(l3);add(c);
+	
+	add(b);
+	setSize(300,300);
+	setVisible(true);
+	setLayout(new FlowLayout(FlowLayout.CENTER));
+	}
+	
+	public void actionPerformed(ActionEvent e)
+	{
+		try
+		{
+		PreparedStatement st=con.prepareStatement("select * from account where ACCno=?");
+		st.setInt(1,Integer.parseInt(args[0]));
+		ResultSet rs= st.executeQuery();
+		if (rs.next())
+		System.out.println(rs.getString(2)+""+rs.getInt(3));
+		}
+	catch(Exception a)
+	{System.out.println(a);
+	}
+	}
+	public static void main(String args[])
+	{
+	account a=new account();
+	}	
+}

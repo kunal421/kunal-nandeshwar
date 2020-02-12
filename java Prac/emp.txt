@@ -1,0 +1,39 @@
+import java.util.*;
+import java.awt.*;
+import java.awt.event.*;
+class employee extends Frame implements ActionListener
+{
+	employee()
+	{
+	Label l1=new Label("Empno");
+	Label l2=new Label("Name");
+	Label l3=new Label("Designation");
+	
+	TextField t1=new TextField(10);
+	TextField t2=new TextField(10);
+	TextField t3=new TextField(10);
+	
+	Button b = new Button("Find");
+	Button b1 = new Button("Delete");
+
+	
+	b.addActionListener(this);
+	add(l1);add(t1);
+	add(l2);add(t2);
+	add(l3);add(t3);
+	
+	add(b);
+	add(b1);
+	setSize(300,300);
+	setVisible(true);
+	setLayout(new FlowLayout(FlowLayout.CENTER));
+	}
+	
+	public void actionPerformed(ActionEvent e)
+	{
+	}
+	public static void main(String args[])
+	{
+	employee e=new employee();
+	}	
+}

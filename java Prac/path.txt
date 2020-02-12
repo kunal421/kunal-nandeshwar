@@ -1,0 +1,28 @@
+
+C:\>javac
+'javac' is not recognized as an internal or external command,
+operable program or batch file.
+
+C:\>d:
+
+D:\>mypath
+
+D:\>set path=C:\Program Files (x86)\Java\jdk1.7.0_55\bin;
+
+D:\>set classpath=C:\Program Files (x86)\Java\jdk1.7.0_55\lib;d:\mysql-connector-java-5.1.48.jar;
+
+D:\>javac allrect.java
+javac: file not found: allrect.java
+Usage: javac <options> <source files>
+use -help for a list of possible options
+
+D:\>javac allrec.java
+javac: file not found: allrec.java
+Usage: javac <options> <source files>
+use -help for a list of possible options
+
+D:\>javac allrec.java
+
+D:\>java allrec
+1 sales
+2 accounts

@@ -1,0 +1,106 @@
+import java.sql.*;
+import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
+class scrollrec extends Frame implements ActionListener
+{
+Label l1,l2,l3,l4;
+TextField t1,t2,t3;
+Button b1,b2,b3,b4,clear;
+Connection con;
+ResultSet rs;
+Statement st;
+public scrollrec()
+{
+setLayout(new FlowLayout());
+l1=new Label("Customer No.");
+l2=new Label("Customer Name");
+l3=new Label("City");
+l4=new Label("Message......");
+t1=new TextField(20);
+t2=new TextField(20);
+t3=new TextField(20);
+b1=new Button("Move First");
+b2=new Button("Move Previous");
+b3=new Button("Move Next");
+b4=new Button("Move Last");
+clear=new Button("Clear");
+b1.addActionListener(this);
+b2.addActionListener(this);
+b3.addActionListener(this);
+b4.addActionListener(this);
+clear.addActionListener(this);
+try
+{
+Class.forName("com.mysql.jdbc.Driver");
+con=DriverManager.getConnection("jdbc:mysql://localhost/test","odbc@localhost","");
+st=con.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE,ResultSet.CONCUR_READ_ONLY);
+rs=st.executeQuery("select * from customer");
+rs.first();
+t1.setText(""+rs.getInt(1));
+t2.setText(rs.getString(2));
+t3.setText(rs.getString(3));
+}catch(Exception w){l4.setText("error "+w);}
+add(l1);add(t1);
+add(l2);add(t2);
+add(l3);add(t3);
+add(l4);
+add(b1);add(b2);add(b3);add(b4);add(clear);
+setSize(300,300);
+setVisible(true);
+}
+public void actionPerformed(ActionEvent e)
+{
+if(e.getSource()==clear)
+{
+t1.setText("");
+t2.setText("");
+t3.setText("");
+l4.setText("");
+}
+if(e.getSource()==b1)
+{
+try
+{
+rs.first();
+t1.setText(""+rs.getInt(1));
+t2.setText(rs.getString(2));
+t3.setText(rs.getString(3));
+}catch(Exception e1){l4.setText(""+e1);}
+}
+if(e.getSource()==b2)
+{
+try
+{
+rs.previous();
+t1.setText(""+rs.getInt(1));
+t2.setText(rs.getString(2));
+t3.setText(rs.getString(3));
+}catch(Exception e1){l4.setText("on first record...");}
+}
+if(e.getSource()==b3)
+{
+try
+{
+rs.next();
+t1.setText(""+rs.getInt(1));
+t2.setText(rs.getString(2));
+t3.setText(rs.getString(3));
+}catch(Exception e1){l4.setText("on last record..");}
+}
+if(e.getSource()==b4)
+{
+try
+{
+rs.last();
+t1.setText(""+rs.getInt(1));
+t2.setText(rs.getString(2));
+t3.setText(rs.getString(3));
+}catch(Exception e1){l4.setText(""+e1);}
+}
+}
+public static void main(String a[])
+{
+new scrollrec();
+}
+}
