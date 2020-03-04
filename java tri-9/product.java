@@ -1,24 +1,25 @@
+
 import java.sql.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.*;
 import java.io.*;
-public class product extends Frame implements ActionListener
+public class empl extends Frame implements ActionListener
 {
 	TextField t1,t2,t3;
 	Label l1,l2,l3;
 	Button b;
 	ResultSet rs;
 	Statement st;
-	product()
+	empl()
 	{
 		setLayout(new FlowLayout());
 		this.setLayout(null);
-		l1=new Label("Product Number: ");
+		l1=new Label("employee Number: ");
 		l1.setBounds(30,90,90,60);
-		l2=new Label("Product Name: ");
+		l2=new Label("e Name: ");
 		l2.setBounds(30,130,90,60);
-		l3=new Label("Product Price: ");
+		l3=new Label("e salary: ");
 		l3.setBounds(30,170,90,60);
 		t1=new TextField(20);
 		t1.setBounds(150,100,90,20);
@@ -26,7 +27,7 @@ public class product extends Frame implements ActionListener
 		t2.setBounds(150,140,90,20);
 		t3=new TextField(20);
 		t3.setBounds(150,190,90,20);
-		b=new Button("Search");
+		b=new Button("submit");
 		b.setBounds(150,220,70,40);
 		b.addActionListener(this);
 		this.add(l1);this.add(t1);this.add(l2);
@@ -40,31 +41,34 @@ public class product extends Frame implements ActionListener
 				try
 		{
 			Class.forName("com.mysql.jdbc.Driver");
-			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3307/jean","root","1111");
+			Connection con=DriverManager.getConnection("jdbc:mysql://localhost:3308/iqbal","root","1111");
 			st=con.createStatement();
 			int ab=Integer.parseInt(t1.getText());
-			rs=st.executeQuery("select * from product where pno="+ab);
+			rs=st.executeQuery("update * from employee where eno="+ab);
 		}
 		catch(Exception w)
 		{
 			t1.setText(""+w);
+			System.out.println(w);
 		}
 		try
 		{
-				rs.first();
+				while(rs.next())
+				{
+				t3.setText(rs.getString(3));
 				t1.setText(rs.getString(1));
 				t2.setText(rs.getString(2));
-				t3.setText(rs.getString(3));
+					
+				}
 		}
 		catch(Exception e1)
 		{
-			t1.setText("");
-			t2.setText("");
-			t3.setText(""+e1);
+			
+			System.out.println(e1);
 		}
 		}
 	}
-	public static void main(String args[])
+	public static void main(String args[]) throws SQLException,ClassNotFoundException
 	{
 		product p=new product();
 		p.setVisible(true);
